@@ -10,10 +10,10 @@ PeerChannel
 import pyautogui
 
 api_id = ******
-api_hash = '*****************'
-username = '*********'
-phone= '+***********)'
-user_input_channel = 'https://t.me/**********'
+api_hash = '*************'
+username = '********'
+phone= '+91*********'
+user_input_channel = 'https://t.me/*********'
 
 
 
@@ -41,18 +41,18 @@ else:
 
 my_channel = client.get_entity(entity)
 
-#client.send_message(entity=entity,message="I am not faded")
 
 
 
-n = float(input('Enter the reset time in seconds : '))
-l = float(input('Enter the time period (in minutes) : '))
-l = (l*60)/n
-print('Program will run ' + str(l) +' times')
-while(l>0):
+
+resetTime = float(input('Enter the reset time in seconds : '))
+checkIterations = float(input('Enter the time period (in minutes) : '))
+checkIterations = (checkIterations*60)/resetTime
+print('Program will run ' + str(checkIterations) +' times')
+
+while(checkIterations>0 ):
+
 	
-	time.sleep(n)
-	l-=1
 	all_messages = [] # contains all messages with details in range 100 
 	while True:   
 		history = client(GetHistoryRequest(
@@ -60,7 +60,7 @@ while(l>0):
 			offset_id=0,
 			offset_date=None,
 			add_offset=0,
-			limit=25,
+			limit=50,
 			max_id=0,
 			min_id=0,
 			hash=0
@@ -75,9 +75,14 @@ while(l>0):
 			all_messages.append(message.to_dict())
 		break
 
-
+	
+	
 	messages =[]
+	
+
 	for i in all_messages:
+		if 'message' not in i.keys() :
+			break
 		if i['message'] == 'Anything else boss':
 			break
 		messages.append(i['message'].lower())
@@ -139,9 +144,6 @@ while(l>0):
 				client.send_message(entity=entity,message="Curi <  "+ lines[delNum][:-1] + " >  deleted boss")
 
 
-
-
-
 		elif(message[0].strip() == 'task add'):
 			file = 'files\\todo.txt'
 			client.send_message(entity = entity, message = 'Task < ' + message[1] + ' > added boss')
@@ -186,6 +188,9 @@ while(l>0):
 		else:
 			client.send_message(entity=entity,message="Boss I am unable to find < " + message[0].strip() + ' >')
 
+
+		time.sleep(resetTime)
+		checkIterations-=1
 
 	if messages != []:
 		print(".Anything else boss.")
