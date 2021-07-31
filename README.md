@@ -1,10 +1,24 @@
 # Telegram-Bot
 Telegram bot helps us to connect to our pc using telegram from any device and perform some tasks like a TODO list, Curi list and obtaining screenshot using commands in chat.
 
+
 ## Features 
+
+
 * Obtain screenshot of current window open on pc
+<img src="images/screen.gif"  width="250"/>
+
+
 * Add and delete tasks in ToDo list 
+<img src="images/task.gif"  width="250"/>
+
+
 * Add and delete queries in Curi List (list of questions born from curiosity )
+<p float = 'left'>
+<img src="images/curi.gif"  width="250"/>
+<img src="images/add.gif"  width="250"/>
+<img src="images/delete.gif"  width="250"/>
+</p>
 
 ##  Installation 
 1. Telegram Bot requires [Python 3] to run.
@@ -26,7 +40,7 @@ user_input_channel = 'https://t.me/***********'
 ## How to use
 * First enter the reset time for application to recheck latest commands (in seconds).
 * Enter the time for which you want to run the application (in minutes).
-* Enter the command you wanna run for following tasks:
+* Enter the commands you wanna run for following tasks:
     * Screenshot : `screen`  
     * Todo List : 
         * `task` for viewing tasks
@@ -40,7 +54,6 @@ user_input_channel = 'https://t.me/***********'
 
 [Telegram api]:<https://core.telegram.org/api/obtaining_api_id>
 [Python 3]:<https://www.python.org/downloads/>
-
 
 
 
