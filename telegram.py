@@ -1,4 +1,3 @@
-from itertools import count
 import telethon.sync
 from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError
@@ -9,11 +8,11 @@ PeerChannel
 )
 import pyautogui
 
-api_id = ******
-api_hash = '*************'
-username = '********'
-phone= '+91*********'
-user_input_channel = 'https://t.me/*********'
+api_id = 1556597
+api_hash = 'a77dadeff48a058742c2492a4852a873'
+username = 'MUKUL'
+phone= '+919896750553'
+user_input_channel = 'https://t.me/joinchat/t_eQUatSwsExODE1'
 
 
 
@@ -49,6 +48,55 @@ resetTime = float(input('Enter the reset time in seconds : '))
 checkIterations = float(input('Enter the time period (in minutes) : '))
 checkIterations = (checkIterations*60)/resetTime
 print('Program will run ' + str(checkIterations) +' times')
+
+
+def read(fileName):
+	file = open("files\\" + fileName + ".txt","r")
+	lines = ''.join(file.readlines()[1:]).strip()
+	client.send_message(entity=entity,message=lines)
+
+
+def addToFile(fileName, typeOfQuery):
+	#Adding queries or tasks to files with name fileName and typeOfQuery
+	file = 'files\\' + fileName + '.txt'
+	client.send_message(entity = entity, message = typeOfQuery + ' < ' + message[1] + ' > addedd boss')
+	with open(file) as file_object:
+		lines = file_object.readlines()
+	
+	count = int(lines[0].split(" ")[0])
+
+	with open(file, 'w') as filo:
+		filo.write( str(count+1) + ' \n')
+		for i in range(1,len(lines)):
+			filo.write( lines[i])
+		filo.write( str(count+1) + ' ' + message[1].strip()+'\n')
+	
+
+def deleteFromFile(fileName, typeOfQuery):
+	#Deleting queries or tasks to files with name fileName and typeOfQuery
+	file = "files\\" + fileName + ".txt"
+	delNum = message[1].strip()
+	with open(file, "r") as f:
+		lines = f.readlines()
+	
+	count = int(lines[0].split(" ")[0])
+	if count < int(delNum):
+		client.send_message(entity=entity,message="No such element exist. Try again")
+	else:
+		delNum = int(delNum)
+		with open(file, 'w') as filo:
+			filo.write( str(count-1) + ' \n')
+			for i in range(1,delNum):
+				filo.write( lines[i])
+			for i in range(delNum+1,len(lines)):
+				filo.write( str(i-1) + ' ' +  ' '.join(lines[i].split(' ')[1:]))
+		
+		client.send_message(entity=entity,message= typeOfQuery +  "<  "+ lines[delNum][:-1] + " >  deleted boss")
+	
+
+
+
+
 
 while(checkIterations>0 ):
 
@@ -103,96 +151,43 @@ while(checkIterations>0 ):
 			
 
 		elif(message[0].strip() == 'curi add'):
+			addToFile('curi','Query')
 			
-			file = 'files\\curi.txt'
-			client.send_message(entity = entity, message = 'Query < ' + message[1] + ' > addedd boss')
-			with open(file) as file_object:
-				lines = file_object.readlines()
-			
-			count = int(lines[0].split(" ")[0])
-
-			with open(file, 'w') as filo:
-				filo.write( str(count+1) + ' \n')
-				for i in range(1,len(lines)):
-					filo.write( lines[i])
-				filo.write( str(count+1) + ' ' + message[1].strip()+'\n')
 
 		elif(message[0].strip() == 'curi'):
-			file = open("files\\curi.txt","r")
-			lines = ''.join(file.readlines()[1:]).strip()
-			client.send_message(entity=entity,message=lines)
+			read('curi')
+			
 			
 
 		elif(message[0].strip() == 'curi delete'):
-			file = "files\\curi.txt"
-			delNum = message[1].strip()
-			with open("files\\curi.txt", "r") as f:
-				lines = f.readlines()
+			deleteFromFile('curi','Curi')
 			
-			count = int(lines[0].split(" ")[0])
-			if count < int(delNum):
-				client.send_message(entity=entity,message="No such element exist. Try again")
-			else:
-				delNum = int(delNum)
-				with open(file, 'w') as filo:
-					filo.write( str(count-1) + ' \n')
-					for i in range(1,delNum):
-						filo.write( lines[i])
-					for i in range(delNum+1,len(lines)):
-						filo.write( str(i-1) + ' ' +  ' '.join(lines[i].split(' ')[1:]))
-				
-				client.send_message(entity=entity,message="Curi <  "+ lines[delNum][:-1] + " >  deleted boss")
 
 
 		elif(message[0].strip() == 'task add'):
-			file = 'files\\todo.txt'
-			client.send_message(entity = entity, message = 'Task < ' + message[1] + ' > added boss')
-			with open(file) as file_object:
-				lines = file_object.readlines()
+			addToFile('todo','Task')
 			
-			count = int(lines[0].split(" ")[0])
-
-			with open(file, 'w') as filo:
-				filo.write( str(count+1) + ' \n')
-				for i in range(1,len(lines)):
-					filo.write( lines[i])
-				filo.write( str(count+1) + ' ' + message[1].strip()+'\n')
 
 		elif(message[0].strip() == 'task'):
-			file = open("files\\todo.txt","r")
-			lines = ''.join(file.readlines()[1:]).strip()
-			client.send_message(entity=entity,message=lines)
+			read('todo')
+			
 			
 
 		elif(message[0].strip() == 'task delete'):
-			file = "files\\todo.txt"
-			delNum = message[1].strip()
-			with open("files\\todo.txt", "r") as f:
-				lines = f.readlines()
-			
-			count = int(lines[0].split(" ")[0])
-			if count < int(delNum):
-				client.send_message(entity=entity,message="No such element exist. Try again")
-			else:
-				delNum = int(delNum)
-				with open(file, 'w') as filo:
-					filo.write( str(count-1) + ' \n')
-					for i in range(1,delNum):
-						filo.write( lines[i])
-					for i in range(delNum+1,len(lines)):
-						filo.write( str(i-1) + ' ' +  ' '.join(lines[i].split(' ')[1:]))
-				
-				client.send_message(entity=entity,message=" Task <  "+ lines[delNum][:-1] + " >  deleted boss")
+			deleteFromFile('todo','Task')
 
 
 		else:
 			client.send_message(entity=entity,message="Boss I am unable to find < " + message[0].strip() + ' >')
 
 
-		time.sleep(resetTime)
-		checkIterations-=1
+	time.sleep(resetTime)
+	checkIterations-=1
 
 	if messages != []:
 		print(".Anything else boss.")
 
 		client.send_message(entity=entity,message="Anything else boss")
+
+
+
