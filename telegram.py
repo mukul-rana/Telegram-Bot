@@ -8,11 +8,11 @@ PeerChannel
 )
 import pyautogui
 
-api_id = 1556597
-api_hash = 'a77dadeff48a058742c2492a4852a873'
-username = 'MUKUL'
-phone= '+919896750553'
-user_input_channel = 'https://t.me/joinchat/t_eQUatSwsExODE1'
+api_id = *******
+api_hash = '***************'
+username = '*****'
+phone= '+91**********'
+user_input_channel = 'https://t.me/*************'
 
 
 
