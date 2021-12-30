@@ -24,7 +24,7 @@ Telegram bot helps us to connect to our pc using telegram from any device and pe
 1. Telegram Bot requires [Python 3] to run.
 2. Obtain Telegram api_id and api_hash from [Telegram api].
 3. Create a channel on telegram and obtain its link.
-4. Install follpython modules using command prompt.
+4. Install following python modules using command prompt.
 `pip install telethon `
 `pip install pyautogui`
 5. Enter your `api_id` , `api_hash`, `username` , `phone_number` and `channel link` in telegram.py:
